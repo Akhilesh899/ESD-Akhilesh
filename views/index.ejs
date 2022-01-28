@@ -1,0 +1,41 @@
+<%- include("./partials/header") %>
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Todo App</a>
+    </div>
+</nav>
+
+<% if(message === 'add')  { %>
+    <div class="alert alert-success mt-2" role="alert">
+        Task added successfully.
+    </div>
+<% } %>
+<% if(message === 'update')  { %>
+    <div class="alert alert-primary mt-2" role="alert">
+        Task updated successfully.
+    </div>
+<% } %>
+<% if(message === 'delete')  { %>
+    <div class="alert alert-danger mt-2" role="alert">
+        Task deleted successfully.
+    </div>
+<% } %>
+
+<div class="container mt-5">
+    <form action="add/todo" method="POST" class="d-flex">
+        <input type="text" name="todo" class="form-control" placeholder="Add Task">
+        <input type="submit" value="Add Task" class="btn btn-md btn-primary mx-2">
+    </form>
+
+
+    <ul class="list-group mt-5">
+        <h2>Tasks List</h2>
+        <% todo.forEach(tasks => { %>
+            <li class="list-group-item"><%= tasks.todo %> <a href="/delete/todo/<%= tasks._id %>" class="btn btn-danger btn-sm">Delete</a> <a href="/update/<%= tasks._id %>" class="btn btn-success btn-sm">Edit</a></li>
+        <% }) %>
+    </ul>
+</div>
+
+
+<%- include("./partials/footer") %>
